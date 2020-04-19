@@ -4,8 +4,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Bay Area SNAP Map </title>
-    <meta name="A map of SNAP and WIC accepting retailers in the Bay Area." content="">
+    <title>Bay Area SNAP Map</title>
+    <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js"></script>
     <link href="https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css" rel="stylesheet" />
@@ -96,7 +96,7 @@
       };
 
       //YOUR TURN: add your Mapbox access token 
-      mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhcmxpZWhvZmZzIiwiYSI6ImNrOTZpbTRrcTBsMXUzZ3AybzV3ODR2MHoifQ.ZvN-SBmvwJCkwHiJOva3Zw';
+      mapboxgl.accessToken = 'pk.eyJ1IjoicHpob3UxMSIsImEiOiJjazk3bWV5czAwZ282M2VwYXowMHh0M3cxIn0.CRZOpqVnJok4x_AcqmbW6A';
       var map = new mapboxgl.Map({
         container: 'map', // container id
         style: "mapbox://styles/mapbox/streets-v11", //YOUR TURN: choose a style: https://docs.mapbox.com/api/maps/#styles
@@ -133,10 +133,26 @@
           var popup = new mapboxgl.Popup()
             .setHTML(`<h3>` + row.Name + `</h3>` + '<h4>' + '<b>' + 'Address: ' + '</b>' + row.Address + '</h4>' + '<h4>' + '<b>' + 'Phone: ' + '</b>' + row.Phone + '</h4>'); // use the table to populate your popup with text
 
-
+          // create function to change the marker color
+          function marker_color() {
+            if (row.snap_store == 1) {
+              return "green"
+            } else if (row.snap_wic_store == 1) {
+              return "purple"
+            } else if (row.snap_restaurant == 1) {
+              return "blue"
+            } else if (row.snap_farmers_market == 1) {
+              return "red"
+            } else if (row.wic_only == 1) {
+              return "orange"
+            } else {
+              return "yellow"
+            }
+          }
+          
           // create a variable for your markup and add it to the map 
           var marker = new mapboxgl.Marker({
-              color: 'purple'
+              color: marker_color()
             })
             .setLngLat([row.Longitude, row.Latitude])
             .setPopup(popup)
