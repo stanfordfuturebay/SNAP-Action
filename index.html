@@ -131,7 +131,8 @@
 
           // create a variable for your popup and populate your popup with information from your table
           var popup = new mapboxgl.Popup()
-            .setHTML(`<h3>` + row.Name + `</h3>` + '<h4>' + '<b>' + 'Address: ' + '</b>' + row.Address + '</h4>' + '<h4>' + '<b>' + 'Phone: ' + '</b>' + row.Phone + '</h4>'); // use the table to populate your popup with text
+            .setHTML(`<h3>` + row.Name + `</h3>` + '<h4>' + '<b>' + 'Address: ' + '</b>' + row.Address + '</h4>' + 
+                     '<h4>' + '<b>' + 'Phone: ' + '</b>' + row.Phone + '</h4>' +  '<h4>' + '<b>' + 'Hours: ' + '</b>' + row.open_hour_weekday + '-' row.close_hour_weekday + '</h4>' ); // use the table to populate your popup with text
 
           // create function to change the marker color
           function marker_color() {
