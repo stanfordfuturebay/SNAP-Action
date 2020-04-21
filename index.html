@@ -142,15 +142,15 @@
 
           // create function to change the marker color
           function marker_color() {
-            if (row.snap_store == 1) {
+            if (row.Type == SNAP_accepting_retailer) {
               return "green"
-            } else if (row.snap_wic_store == 1) {
+            } else if (row.Type == WIC_SNAP_retailer) {
               return "purple"
-            } else if (row.snap_restaurant == 1) {
+            } else if (row.Type == SNAP_restuarant) {
               return "blue"
-            } else if (row.snap_farmers_market == 1) {
+            } else if (row.Type == SNAP_farmers_market) {
               return "red"
-            } else if (row.wic_only == 1) {
+            } else if (row.Type == WIC_only_store) {
               return "orange"
             } else {
               return "yellow"
