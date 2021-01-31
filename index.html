@@ -28,6 +28,15 @@
       top: 0;
       bottom: 0;
     }
+    
+    .marker {
+      background-image: url('https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png');
+      background-size: cover;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
 
 
     .mapboxgl-popup {
@@ -165,13 +174,48 @@
             }
           }
           
+          function change_icon() {
+            if (row.Type == "SNAP_accepting_retailer") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "WIC_SNAP_retailer") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "SNAP_restuarant") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "SNAP_farmers_market") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "WIC_only_store") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "Food") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "Core_service_provider") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "Housing") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else if (row.Type == "Legal") {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            } else {
+              return "https://raw.githubusercontent.com/stanfordfuturebay/SNAP-Action/master/green.png"
+            }
+          }
+          
           // create a variable for your markup and add it to the map 
-          var marker = new mapboxgl.Marker({
-              color: marker_color()
-            })
+          var marker = new mapboxgl.Marker()
             .setLngLat([row.Longitude, row.Latitude])
             .setPopup(popup)
             .addTo(map); // add the marker to the map
+            
+          // add markers to map
+          geojson.features.forEach(function(marker) {
+          
+            // create a HTML element for each feature
+            var el = document.createElement('div');
+            el.className = 'marker';
+          
+            // make a marker for each feature and add to the map
+            new mapboxgl.Marker(el)
+              .setLngLat(marker.geometry.coordinates)
+              .addTo(map);
+          });
 
 
         });
